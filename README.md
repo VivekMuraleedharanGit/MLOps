@@ -9,3 +9,7 @@ dvc add data_given/winequality.csv
 
 git add .
 git commit -m "first commit"
+
+git remotee add origin https://github.com/VivekMuraleedharanGit/MLOps.git
+git branch -M main
+git push origin main
