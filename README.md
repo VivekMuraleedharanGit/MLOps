@@ -1,5 +1,5 @@
 To create virtual env 
-''' bash
+'''bash
 
 conda create -n wineq python=3.7 -y
 
