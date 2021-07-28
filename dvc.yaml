@@ -1,2 +1,13 @@
 stages:
-  
+  load_data:
+    cmd: python src/load_data.py --config=parameters.yaml
+    #cmd command
+    deps:
+    #dependencies are
+    - src/get_data.py
+    - src/load_data.py
+    - data_given/winequality.csv
+    outs:
+    #outputfile
+    - data/raw/winequality.csv
+    
