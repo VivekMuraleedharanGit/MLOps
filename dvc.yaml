@@ -11,3 +11,15 @@ stages:
     #outputfile
     - data/raw/winequality.csv
     
+  split_data:
+    cmd: python src/split_data.py --config=parameters.yaml
+    #cmd command
+    deps:
+    #dependencies are
+    - src/split_data.py
+    - data/raw/winequality.csv
+    outs:
+    #outputfiles
+    - data/processed/train_winequality.csv
+    - data/processed/test_winequality.csv
+    
