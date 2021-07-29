@@ -1,30 +1,30 @@
 schema: '2.0'
 stages:
   load_data:
-    cmd: python src/load_data.py --config=parameters.yaml
+    cmd: python src/load_data.py --config=params.yaml
     deps:
     - path: data_given/winequality.csv
       md5: ccc8d3507eb151f53f760d36abdef888
       size: 91998
     - path: src/get_data.py
-      md5: 93370cc52c8ec9e87988a87f46032ab2
-      size: 711
+      md5: 6eeea2696a5b3f5e51b6a17a3284e9b6
+      size: 707
     - path: src/load_data.py
-      md5: 7c30d232c4cc596d8ea22408fa8c91d0
-      size: 725
+      md5: 6f997e1464f49163f8f1a65630059d0c
+      size: 721
     outs:
     - path: data/raw/winequality.csv
       md5: d98e8f2eca228c11c4de1cc96866a54d
       size: 93598
   split_data:
-    cmd: python src/split_data.py --config=parameters.yaml
+    cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/raw/winequality.csv
       md5: d98e8f2eca228c11c4de1cc96866a54d
       size: 93598
     - path: src/split_data.py
-      md5: 122ae9be19e04ef46338cfe090c4a2d7
-      size: 1145
+      md5: 270713d810ca44b7958519b1b0f869be
+      size: 1141
     outs:
     - path: data/processed/test_winequality.csv
       md5: 01718da3bd6e206060ed00667ca1a389
@@ -32,3 +32,29 @@ stages:
     - path: data/processed/train_winequality.csv
       md5: 4bccf4d668cdc60115de42ba74d416ab
       size: 74913
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_winequality.csv
+      md5: 01718da3bd6e206060ed00667ca1a389
+      size: 18831
+    - path: data/processed/train_winequality.csv
+      md5: 4bccf4d668cdc60115de42ba74d416ab
+      size: 74913
+    - path: src/train_and_evaluate.py
+      md5: 88cb8a0d3f06324eb42195fbd2d5a11a
+      size: 2831
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.88
+        estimators.ElasticNet.params.l1_ratio: 0.89
+    outs:
+    - path: report/params.json
+      md5: 0568f34313ba7c5e55128b75dbcbee5c
+      size: 46
+    - path: report/scores.json
+      md5: ac89e037063ee307b6d23c8ef0583610
+      size: 100
+    - path: saved_models/model.joblib
+      md5: 00ed53db4e790ca27a475af53f04eba1
+      size: 818
