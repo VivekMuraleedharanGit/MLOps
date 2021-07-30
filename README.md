@@ -39,3 +39,27 @@ git remote add origin https://github.com/VivekMuraleedharanGit/MLOps.git
 git branch -M main
 git push origin main
 ```
+
+
+tox command
+```bash
+tox
+```
+for rebuilding 
+```bash
+tox-r
+```
+pytest command
+```bash
+pytest -v
+```
+
+setup commands - local package installation
+```bash
+pip install -e .
+``` 
+
+build our own package - tar file
+```bash 
+python setup.py sdist bdist wheel
+```
