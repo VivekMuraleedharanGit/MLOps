@@ -3,4 +3,4 @@ dvc[gdrive]
 sklearn 
 pandas
 pytest
-tox
+tox                 
